@@ -6,7 +6,7 @@ export const stateData = {
     totalChildren: 5809,
     licensedHomes: 2474,
     waitingForAdoption: 486,
-    reunificationRate: 69.2,
+    reunificationRate: 79.2,
     familyPreservationCases: 50
   }
 };
