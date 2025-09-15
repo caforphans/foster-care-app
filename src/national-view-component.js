@@ -1,7 +1,7 @@
 import React from 'react';
 import { Users, Church } from 'lucide-react';
-import StaticMap from './StaticMap';
-import { nationalStats } from '../data/mockData';
+import StaticMap from './static-map-component';
+import { nationalStats } from './mock-data';
 
 const NationalView = ({ onSelectState, onSelectCounty }) => {
   return (

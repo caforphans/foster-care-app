@@ -1,23 +1,72 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+// Import components
+import LandingPage from './landing-page-component';
+import NationalView from './national-view-component';
+import CountyView from './county-view-component';
+import OrganizationView from './organization-view-component';
+
 function App() {
+  const [currentView, setCurrentView] = useState('landing'); // 'landing', 'national', 'county', 'organization'
+  const [selectedCounty, setSelectedCounty] = useState('');
+  const [selectedState, setSelectedState] = useState('');
+
+
+  const handleSelectCounty = (county) => {
+    setSelectedCounty(county);
+    setCurrentView('county');
+  };
+
+  const handleSelectState = (state) => {
+    setSelectedState(state);
+    setCurrentView('national'); // Stay on national view when selecting state
+  };
+
+  const handleBackToNational = () => {
+    setCurrentView('national');
+    setSelectedCounty('');
+  };
+
+  const handleBackToCounty = () => {
+    setCurrentView('county');
+  };
+
+  const handleExploreMap = () => {
+    setCurrentView('national');
+  };
+
+  const handleViewOrganizations = () => {
+    setCurrentView('organization');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {currentView === 'landing' && (
+        <LandingPage onSelectCounty={handleSelectCounty} />
+      )}
+      
+      {currentView === 'national' && (
+        <NationalView 
+          onSelectState={handleSelectState}
+          onSelectCounty={handleSelectCounty}
+        />
+      )}
+      
+      {currentView === 'county' && (
+        <CountyView 
+          county={selectedCounty}
+          onBack={handleBackToNational}
+          onExploreMap={handleExploreMap}
+        />
+      )}
+      
+      {currentView === 'organization' && (
+        <OrganizationView 
+          county={selectedCounty}
+          onBack={handleBackToCounty}
+        />
+      )}
     </div>
   );
 }

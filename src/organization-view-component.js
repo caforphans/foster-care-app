@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowLeft, Users, Heart, Plus, Minus, Maximize2 } from 'lucide-react';
-import StaticMap from './StaticMap';
-import { countyData, organizations } from '../data/mockData';
+import StaticMap from './static-map-component';
+import { countyData, organizations } from './mock-data';
 
 const OrganizationView = ({ county, onBack }) => {
   const data = countyData[county];

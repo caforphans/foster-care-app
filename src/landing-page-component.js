@@ -1,105 +1,54 @@
-import React, { useState } from 'react';
-import { ChevronDown, Map } from 'lucide-react';
+import React from 'react';
 
-const LandingPage = ({ onSelectCounty }) => {
-  const [selectedCounty, setSelectedCounty] = useState('');
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  const counties = [
-    'Butler County, AL',
-    'Nassau County, NY', 
-    'Suffolk County, NY',
-    'Greenville County, SC'
-  ];
-
-  const handleCountySelect = (county) => {
-    setSelectedCounty(county);
-    setShowDropdown(false);
-  };
-
-  const handleExploreMap = () => {
-    if (selectedCounty) {
-      const countyKey = selectedCounty.includes('Butler') ? 'butler-al' : 'nassau-ny';
-      onSelectCounty(countyKey);
-    }
-  };
-
+export default function LandingPage({ onSelectCounty, onExploreMap }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
-      <div className="w-full max-w-2xl mx-auto px-4">
-        <div className="text-center mb-8">
-          <div className="text-3xl font-bold mb-2">
-            MORE TH<span className="text-blue-500">></span>N ENOUGH
-          </div>
-        </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Foster Care <span className="text-blue-500">Where You Live</span>
-            </h1>
-            <p className="text-gray-600">Explore the data and connect to local organizations</p>
-          </div>
+    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center text-center px-4">
+      {/* Logo/Header */}
+      <h1 className="text-3xl font-bold tracking-wide text-gray-900 mb-6">
+        <span className="text-black">MORE TH</span>
+        <span className="text-blue-600">&gt;</span>
+        <span className="text-black">N ENOUGH</span>
+      </h1>
 
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 border-2 border-gray-300 rounded-full flex items-center justify-center">
-                <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-              </div>
-              <span className="text-lg font-medium">What county do you live in?</span>
-            </div>
+      {/* Title + Subtitle */}
+      <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-2">
+        Foster Care <span className="text-blue-600">Where You Live</span>
+      </h2>
+      <p className="text-gray-600 mb-6">
+        Explore the data and connect to local organizations
+      </p>
 
-            <div className="ml-11">
-              <label className="block text-sm text-gray-600 mb-2">County or county equivalent</label>
-              <div className="relative">
-                <button
-                  onClick={() => setShowDropdown(!showDropdown)}
-                  className="w-full p-3 border border-gray-300 rounded-lg text-left flex items-center justify-between hover:border-blue-500 focus:outline-none focus:border-blue-500"
-                >
-                  <span className={selectedCounty ? 'text-gray-900' : 'text-gray-500'}>
-                    {selectedCounty || 'Select a county'}
-                  </span>
-                  <ChevronDown className="w-5 h-5 text-gray-400" />
-                </button>
-                
-                {showDropdown && (
-                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                    {counties.map((county, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleCountySelect(county)}
-                        className={`w-full p-3 text-left hover:bg-blue-50 ${
-                          idx === 0 ? 'rounded-t-lg' : ''
-                        } ${idx === counties.length - 1 ? 'rounded-b-lg' : ''} ${
-                          county.includes('Nassau') ? 'bg-blue-500 text-white' : ''
-                        }`}
-                      >
-                        {county}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+      {/* Dropdown */}
+      <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+        <label className="block text-gray-700 font-medium mb-2">
+          What county do you live in?
+        </label>
+        <select
+          onChange={(e) => onSelectCounty(e.target.value)}
+          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Select a county</option>
+          <option value="Butler County, AL">Butler County, AL</option>
+          <option value="Nassau County, NY">Nassau County, NY</option>
+          <option value="Suffolk County, NY">Suffolk County, NY</option>
+          <option value="Greenville County, SC">Greenville County, SC</option>
+        </select>
+      </div>
 
-            <div className="ml-11 flex items-center justify-between bg-gray-50 rounded-lg p-4">
-              <div className="flex items-center gap-2">
-                <Map className="w-5 h-5 text-blue-500" />
-                <span className="text-sm text-gray-700">Want to explore multiple counties or states?</span>
-              </div>
-              <button 
-                onClick={handleExploreMap}
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 flex items-center gap-2"
-              >
-                Explore the map
-                <span>→</span>
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* Explore multiple */}
+      <div className="mt-6 flex items-center bg-white shadow rounded-lg p-4 max-w-md w-full">
+        <span className="text-blue-600 text-2xl mr-2">🗺️</span>
+        <p className="text-gray-700 flex-1">
+          Want to explore multiple counties or states?
+        </p>
+        <button
+          onClick={onExploreMap}
+          className="ml-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+        >
+          Explore the map →
+        </button>
       </div>
     </div>
   );
-};
-
-export default LandingPage;
+}
