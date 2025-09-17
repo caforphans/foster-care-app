@@ -29,10 +29,8 @@ export default function LandingPage({ onSelectCounty, onExploreMap }) {
           className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">Select a county</option>
-          <option value="Butler County, AL">Butler County, AL</option>
-          <option value="Nassau County, NY">Nassau County, NY</option>
-          <option value="Suffolk County, NY">Suffolk County, NY</option>
-          <option value="Greenville County, SC">Greenville County, SC</option>
+          <option value="butler-al">Butler County, AL</option>
+          <option value="nassau-ny">Nassau County, NY</option>
         </select>
       </div>
 
