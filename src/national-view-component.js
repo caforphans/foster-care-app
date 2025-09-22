@@ -8,38 +8,57 @@ import ChurchIcon from './assets/church_icon.png';
 import HandIcon from './assets/front_hand.png';
 import PointerIcon from './assets/Mouse pointer.png';
 import RecoloredMap from './assets/RecoloredMap.png';
+import KeyForMap from './assets/KeyForMap.png';
+import MTELogo from './assets/MTE_Logo.png';
 
 const NationalView = ({ onSelectState }) => {
   return (
-    <div className="min-h-screen bg-blue-50">
-      {/* Header (no white box) */}
-      <div className="max-w-7xl mx-auto px-4 py-6 text-center relative">
-        <h1
-          className="text-3xl sm:text-4xl text-gray-900"
-          style={{ fontFamily: "'Pacifico', cursive" }}
-        >
-          United States of America
-        </h1>
-        <p className="text-gray-700 mt-1">
-          Understand foster care trends across the country
-        </p>
-        <div className="absolute right-4 top-6 flex gap-2">
-          <button className="px-3 py-1 border border-gray-300 text-gray-700 rounded text-sm bg-white hover:bg-gray-50">
-            Organization View
-          </button>
-          <button className="px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600">
-            Metrics View
-          </button>
+    <div className="min-h-screen bg-blue-50 flex flex-col">
+      {/* Header */}
+      <div className="bg-blue-50 border-b">
+        <div className="max-w-7xl mx-auto px-4 py-6 text-center relative">
+          <h1
+            className="text-3xl sm:text-4xl text-gray-900"
+            style={{ fontFamily: "'Pacifico', cursive" }}
+          >
+            United States of America
+          </h1>
+          <p className="text-gray-700 mt-1">
+            Explore foster care data where you live
+          </p>
+          <div className="absolute right-4 top-6 flex gap-2">
+            <button className="px-3 py-1 border border-blue-500 text-blue-600 rounded text-sm bg-white hover:bg-blue-50 shadow-sm">
+              Organization View
+            </button>
+            <button className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 shadow-sm">
+              Metrics View
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-6 grid grid-cols-12 gap-6">
+      <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-12 gap-6 flex-grow">
         {/* Sidebar */}
         <div className="col-span-3 space-y-4">
+          {/* Jump selectors */}
+          <div className="bg-white p-4 rounded-lg shadow-sm space-y-3">
+            <select className="w-full border border-gray-300 rounded p-2 text-sm">
+              <option>Jump to a State</option>
+              {/* TODO: map states dynamically */}
+            </select>
+            <select className="w-full border border-gray-300 rounded p-2 text-sm">
+              <option>Jump to a County</option>
+              {/* TODO: map counties dynamically */}
+            </select>
+          </div>
+
           {/* Metrics */}
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h3 className="font-semibold mb-3">Metrics</h3>
-            <select className="w-full border border-gray-300 rounded p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <h3 className="font-semibold mb-1">Metrics</h3>
+            <p className="text-xs text-gray-500 mb-2">
+              Filter by metric type to see what is happening across the country
+            </p>
+            <select className="w-full border border-gray-300 rounded p-2 text-sm">
               <option>Count of Family Preservation Cases</option>
               <option>Ratio of Licensed Homes to Children in Care</option>
               <option>Count of Children Waiting For Adoption</option>
@@ -58,7 +77,7 @@ const NationalView = ({ onSelectState }) => {
               <div className="text-sm font-medium mb-2">
                 Number of Family Preservation Cases in the U.S. (by 000s)
               </div>
-              {/* Simple mock bar chart */}
+              {/* Mock bar chart */}
               <div className="h-24 bg-white rounded flex items-end justify-between px-2 pb-2">
                 <div className="bg-orange-500 w-8 h-20"></div>
                 <div className="bg-orange-500 w-8 h-16"></div>
@@ -69,15 +88,18 @@ const NationalView = ({ onSelectState }) => {
                 <span>2023</span>
                 <span>2024</span>
               </div>
+              <div className="mt-3 text-xs text-gray-500">
+                Source: AFCARS 2022–2024
+              </div>
             </div>
           </div>
         </div>
 
         {/* Main Area */}
         <div className="col-span-9">
-          {/* Map Section */}
-          <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
-            <div className="bg-blue-50 text-blue-700 p-2 rounded mb-4 text-sm flex items-center justify-between">
+          {/* Map + Legend */}
+          <div className="bg-white rounded-lg shadow-sm p-4 mb-6 relative">
+            <div className="bg-blue-50 text-blue-700 p-2 rounded mb-4 text-sm space-y-2">
               <div className="flex items-center gap-2">
                 <img src={HandIcon} alt="Hover hand" className="w-5 h-5" />
                 <span>Hover over a state to display the data</span>
@@ -87,12 +109,19 @@ const NationalView = ({ onSelectState }) => {
                 <span>Click to deep-dive into a particular state</span>
               </div>
             </div>
-            {/* Recolored map image (replace StaticMap for now) */}
-            <img
-              src={RecoloredMap}
-              alt="Recolored US map"
-              className="w-full rounded"
-            />
+            <div className="relative overflow-hidden">
+              <img
+                src={RecoloredMap}
+                alt="Recolored US map"
+                className="w-[95%] mx-auto rounded transform scale-105"
+              />
+              {/* Legend bottom-right */}
+              <img
+                src={KeyForMap}
+                alt="Map Legend"
+                className="absolute bottom-4 right-4 w-40"
+              />
+            </div>
           </div>
 
           {/* Bottom Stats */}
@@ -131,6 +160,11 @@ const NationalView = ({ onSelectState }) => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Footer */}
+      <div className="bg-blue-50 border-t py-4 text-right pr-6">
+        <img src={MTELogo} alt="More Than Enough" className="h-8 inline-block" />
       </div>
     </div>
   );
