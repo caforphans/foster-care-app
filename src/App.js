@@ -8,11 +8,12 @@ import CountyView from './county-view-component';
 import OrganizationView from './organization-view-component';
 
 function App() {
-  const [currentView, setCurrentView] = useState('landing'); // 'landing', 'national', 'county', 'organization'
+  const [currentView, setCurrentView] = useState('landing'); 
+  // possible views: 'landing', 'national', 'county', 'organization'
   const [selectedCounty, setSelectedCounty] = useState('');
   const [selectedState, setSelectedState] = useState('');
 
-
+  // Navigation handlers
   const handleSelectCounty = (county) => {
     setSelectedCounty(county);
     setCurrentView('county');
@@ -20,7 +21,7 @@ function App() {
 
   const handleSelectState = (state) => {
     setSelectedState(state);
-    setCurrentView('national'); // Stay on national view when selecting state
+    setCurrentView('national');
   };
 
   const handleBackToNational = () => {
@@ -40,16 +41,25 @@ function App() {
     setCurrentView('organization');
   };
 
+  const handleViewMetrics = () => {
+    setCurrentView('national');
+  };
+
   return (
     <div className="App">
       {currentView === 'landing' && (
-        <LandingPage onSelectCounty={handleSelectCounty} />
+        <LandingPage 
+          onSelectCounty={handleSelectCounty} 
+          onExploreMap={handleExploreMap}
+        />
       )}
       
       {currentView === 'national' && (
         <NationalView 
           onSelectState={handleSelectState}
           onSelectCounty={handleSelectCounty}
+          onViewOrganizations={handleViewOrganizations}
+          onViewMetrics={handleViewMetrics}
         />
       )}
       
@@ -65,6 +75,7 @@ function App() {
         <OrganizationView 
           county={selectedCounty}
           onBack={handleBackToCounty}
+          onViewMetrics={handleViewMetrics}
         />
       )}
     </div>

@@ -11,7 +11,12 @@ import RecoloredMap from './assets/RecoloredMap.png';
 import KeyForMap from './assets/KeyForMap.png';
 import MTELogo from './assets/MTE_Logo.png';
 
-const NationalView = ({ onSelectState }) => {
+const NationalView = ({ 
+  onSelectState, 
+  onSelectCounty, 
+  onViewOrganizations, 
+  onViewMetrics 
+}) => {
   return (
     <div className="min-h-screen bg-blue-50 flex flex-col">
       {/* Header */}
@@ -27,10 +32,16 @@ const NationalView = ({ onSelectState }) => {
             Explore foster care data where you live
           </p>
           <div className="absolute right-4 top-6 flex gap-2">
-            <button className="px-3 py-1 border border-blue-500 text-blue-600 rounded text-sm bg-white hover:bg-blue-50 shadow-sm">
+            <button
+              onClick={onViewOrganizations}
+              className="px-3 py-1 border border-blue-500 text-blue-600 rounded text-sm bg-white hover:bg-blue-50 shadow-sm"
+            >
               Organization View
             </button>
-            <button className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 shadow-sm">
+            <button
+              onClick={onViewMetrics}
+              className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 shadow-sm"
+            >
               Metrics View
             </button>
           </div>
@@ -42,13 +53,21 @@ const NationalView = ({ onSelectState }) => {
         <div className="col-span-3 space-y-4">
           {/* Jump selectors */}
           <div className="bg-white p-4 rounded-lg shadow-sm space-y-3">
-            <select className="w-full border border-gray-300 rounded p-2 text-sm">
+            <select 
+              onChange={(e) => onSelectState(e.target.value)} 
+              className="w-full border border-gray-300 rounded p-2 text-sm"
+            >
               <option>Jump to a State</option>
-              {/* TODO: map states dynamically */}
+              <option value="alabama">Alabama</option>
+              <option value="new-york">New York</option>
             </select>
-            <select className="w-full border border-gray-300 rounded p-2 text-sm">
+            <select 
+              onChange={(e) => onSelectCounty(e.target.value)} 
+              className="w-full border border-gray-300 rounded p-2 text-sm"
+            >
               <option>Jump to a County</option>
-              {/* TODO: map counties dynamically */}
+              <option value="butler-al">Butler County, AL</option>
+              <option value="nassau-ny">Nassau County, NY</option>
             </select>
           </div>
 
@@ -77,7 +96,6 @@ const NationalView = ({ onSelectState }) => {
               <div className="text-sm font-medium mb-2">
                 Number of Family Preservation Cases in the U.S. (by 000s)
               </div>
-              {/* Mock bar chart */}
               <div className="h-24 bg-white rounded flex items-end justify-between px-2 pb-2">
                 <div className="bg-orange-500 w-8 h-20"></div>
                 <div className="bg-orange-500 w-8 h-16"></div>
@@ -115,7 +133,6 @@ const NationalView = ({ onSelectState }) => {
                 alt="Recolored US map"
                 className="w-[95%] mx-auto rounded transform scale-105"
               />
-              {/* Legend bottom-right */}
               <img
                 src={KeyForMap}
                 alt="Map Legend"
@@ -126,7 +143,6 @@ const NationalView = ({ onSelectState }) => {
 
           {/* Bottom Stats */}
           <div className="grid grid-cols-3 gap-4">
-            {/* Family/Kinship */}
             <div className="bg-white p-6 rounded-lg shadow-sm text-center">
               <img src={BiologicalFamilyIcon} alt="Family" className="w-10 h-10 mx-auto mb-3" />
               <div className="text-2xl font-bold">{nationalStats.childrenInCare.toLocaleString()}</div>
@@ -138,8 +154,6 @@ const NationalView = ({ onSelectState }) => {
                 {nationalStats.childrenInKinship.toLocaleString()} Children in Kinship Care
               </div>
             </div>
-
-            {/* Adoption */}
             <div className="bg-white p-6 rounded-lg shadow-sm text-center">
               <img src={AdoptiveFamilyIcon} alt="Adoption" className="w-10 h-10 mx-auto mb-3" />
               <div className="text-2xl font-bold">{nationalStats.childrenWaitingAdoption.toLocaleString()}</div>
@@ -148,8 +162,6 @@ const NationalView = ({ onSelectState }) => {
                 {nationalStats.childrenAdopted2023.toLocaleString()} Children Adopted FY 2023
               </div>
             </div>
-
-            {/* Churches */}
             <div className="bg-white p-6 rounded-lg shadow-sm text-center">
               <img src={ChurchIcon} alt="Churches" className="w-10 h-10 mx-auto mb-3" />
               <div className="text-2xl font-bold">{(nationalStats.totalChurches / 1000).toFixed(0)}K</div>
