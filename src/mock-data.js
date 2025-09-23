@@ -8,12 +8,22 @@ export const stateData = {
     waitingForAdoption: 486,
     reunificationRate: 79.2,
     familyPreservationCases: 50
+  },
+  "new-york": {
+    name: 'New York',
+    totalChildren: 18045, // fake values
+    licensedHomes: 7420,
+    waitingForAdoption: 934,
+    reunificationRate: 76.3,
+    familyPreservationCases: 320
   }
 };
+
 
 export const countyData = {
   'butler-al': {
     name: 'Butler County, Alabama',
+    state: 'Alabama',
     population: 18832,
     totalChurches: 5,
     childrenInCare: 21,
@@ -39,6 +49,7 @@ export const countyData = {
   },
   'nassau-ny': {
     name: 'Nassau County, New York',
+    state: 'New York',
     population: 1395774,
     totalChurches: 127,
     childrenInCare: 543,

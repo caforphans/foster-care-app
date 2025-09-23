@@ -13,7 +13,7 @@ import HistoryIcon from "./assets/HistoryArrow.png";
 import AlabamaMap from "./assets/Alabama.png";
 import MTELogo from "./assets/MTE_Logo.png";
 
-const CountyView = ({ county, onExploreMap }) => {
+const County_Metric_View = ({ county, onExploreMap }) => {
   const data = countyData[county];
   const state = stateData.alabama;
 
@@ -207,4 +207,4 @@ const CountyView = ({ county, onExploreMap }) => {
   );
 };
 
-export default CountyView;
+export default County_Metric_View;

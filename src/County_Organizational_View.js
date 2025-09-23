@@ -4,7 +4,7 @@ import StaticMap from './static-map-component';
 import { countyData, organizations } from './mock-data';
 import MTELogo from './assets/MTE_Logo.png';
 
-const OrganizationView = ({ county, onBack, onViewMetrics }) => {
+const County_Organizational_View = ({ county, onBack, onViewMetrics }) => {
   const data = countyData[county];
   if (!data) return null;
 
@@ -229,4 +229,4 @@ const OrganizationView = ({ county, onBack, onViewMetrics }) => {
   );
 };
 
-export default OrganizationView;
+export default County_Organizational_View;

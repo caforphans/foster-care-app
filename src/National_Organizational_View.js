@@ -11,7 +11,7 @@ import RecoloredMap from './assets/RecoloredMap.png';
 import KeyForMap from './assets/KeyForMap.png';
 import MTELogo from './assets/MTE_Logo.png';
 
-const NationalView = ({ 
+const National_Organizational_View = ({ 
   onSelectState, 
   onSelectCounty, 
   onViewOrganizations, 
@@ -182,4 +182,4 @@ const NationalView = ({
   );
 };
 
-export default NationalView;
+export default National_Organizational_View;
