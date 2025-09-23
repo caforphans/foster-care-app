@@ -23,18 +23,7 @@ const County_Organizational_View = ({ county, onBack, onViewMetrics }) => {
             Explore local organizations and connections near you
           </p>
 
-          {/* Toggle buttons */}
-          <div className="absolute right-4 top-6 flex gap-2">
-            <button className="px-3 py-1 bg-blue-600 text-white rounded text-sm shadow-sm">
-              Organization View
-            </button>
-            <button
-              onClick={onViewMetrics}
-              className="px-3 py-1 border border-blue-500 text-blue-600 rounded text-sm bg-white hover:bg-blue-50 shadow-sm"
-            >
-              Metrics View
-            </button>
-          </div>
+
         </div>
       </div>
 

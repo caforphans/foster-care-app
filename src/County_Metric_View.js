@@ -41,24 +41,7 @@ const County_Metric_View = ({ county, onExploreMap }) => {
           <div className="text-xs text-gray-600 mt-1">{data.countyOnly || data.name.split(",")[0]}</div>
         </div>
 
-        {/* Action buttons */}
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-center flex-wrap gap-3">
-          <button className="flex items-center gap-2 bg-white shadow px-3 py-2 rounded-lg text-sm">
-            <img src={DownloadIcon} alt="Download" className="w-5 h-5" />
-            Download Data
-          </button>
-          <button className="flex items-center gap-2 bg-white shadow px-3 py-2 rounded-lg text-sm">
-            <img src={HistoryIcon} alt="Download" className="w-5 h-5" />
-            View Historical Data
-          </button>
-          <button
-            onClick={onExploreMap}
-            className="flex items-center gap-2 bg-white shadow px-3 py-2 rounded-lg text-sm"
-          >
-            <img src={MapIcon} alt="Map" className="w-5 h-5" />
-            Explore the Map
-          </button>
-        </div>
+
       </header>
 
       {/* Stat bar (extra space before it) */}

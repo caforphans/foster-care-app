@@ -1,9 +1,9 @@
 import React from "react";
 
-const State_Metric_View = ({ state }) => {
+const County_Historic_View = ({ state }) => {
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold">State Metric View</h1>
+      <h1 className="text-3xl font-bold">County Historic Data</h1>
       <p className="mt-2 text-gray-600">
         Showing metrics for: <span className="font-semibold">{state || "Example State"}</span>
       </p>
@@ -26,4 +26,4 @@ const State_Metric_View = ({ state }) => {
   );
 };
 
-export default State_Metric_View;
+export default County_Historic_View;

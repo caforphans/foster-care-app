@@ -1,42 +1,46 @@
 import React from "react";
 import Region_Menu from "./Region_Menu";
 
+// Assets
+import ChartsIcon from "./assets/Charts.png";
+import ChurchIcon from "./assets/church_icon.png";
+import HistoryIcon from "./assets/HistoryArrow.png";
+import DownloadIcon from "./assets/download_icon.png";
+
 export default function TopNav({ currentView, onSelectRegion, onSwitchView }) {
+  const navButtons = [
+    { id: "metric", label: "Metrics", icon: ChartsIcon },
+    { id: "organizational", label: "Organizations", icon: ChurchIcon },
+    { id: "historic", label: "Historic Data", icon: HistoryIcon },
+    { id: "download", label: "Download Data", icon: DownloadIcon },
+  ];
+
   return (
     <div className="bg-blue-50 border-b shadow-sm py-3 px-4 flex justify-between items-center relative">
       {/* Region Menu */}
       <Region_Menu onSelectRegion={onSelectRegion} onSwitchView={onSwitchView} />
 
-      {/* Switch View Buttons */}
-      <div className="flex gap-2">
-        <button
-          onClick={() => onSwitchView("metric")}
-          className={`px-3 py-1 rounded ${
-            currentView === "metric" ? "bg-blue-600 text-white" : "bg-gray-100"
-          }`}
-        >
-          Metric
-        </button>
-        <button
-          onClick={() => onSwitchView("organizational")}
-          className={`px-3 py-1 rounded ${
-            currentView === "organizational"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-100"
-          }`}
-        >
-          Organizational
-        </button>
-        <button
-          onClick={() => onSwitchView("historic")}
-          className={`px-3 py-1 rounded ${
-            currentView === "historic"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-100"
-          }`}
-        >
-          Historic
-        </button>
+      {/* Navigation Buttons */}
+      <div className="flex gap-3">
+        {navButtons.map((btn) => (
+          <button
+            key={btn.id}
+            onClick={() =>
+              btn.id === "download"
+                ? alert("Download triggered!") // TODO: hook up download
+                : onSwitchView(btn.id)
+            }
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm shadow 
+              ${
+                currentView === btn.id
+                  ? "bg-gray-700 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
+          >
+            <img src={btn.icon} alt={btn.label} className="w-5 h-5" />
+            {btn.label}
+          </button>
+        ))}
       </div>
     </div>
   );
