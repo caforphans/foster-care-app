@@ -25,11 +25,7 @@ export default function TopNav({ currentView, onSelectRegion, onSwitchView }) {
         {navButtons.map((btn) => (
           <button
             key={btn.id}
-            onClick={() =>
-              btn.id === "download"
-                ? alert("Download triggered!") // TODO: hook up download
-                : onSwitchView(btn.id)
-            }
+            onClick={() => onSwitchView(btn.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm shadow 
               ${
                 currentView === btn.id

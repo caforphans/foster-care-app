@@ -22,10 +22,13 @@ import County_Metric_View from "./County_Metric_View";
 import County_Organizational_View from "./County_Organizational_View";
 import County_Historic_View from "./County_Historic_View";
 
+// Download Page
+import Download_Page from "./Download_Page";
+
 function App() {
   // region = "landing" | "national" | "state" | "county"
   const [region, setRegion] = useState("landing");
-  // view = "metric" | "organizational" | "historic"
+  // view = "metric" | "organizational" | "historic" | "download"
   const [view, setView] = useState("metric");
   // selectedRegion holds the chosen object from Region_Menu
   // e.g. { level: "county", id: "butler-al" }
@@ -39,10 +42,24 @@ function App() {
   };
 
   const handleSwitchView = (newView) => {
+    if (newView === "download") {
+      setView("download");
+      return;
+    }
     setView(newView);
   };
 
   const renderView = () => {
+    // DOWNLOAD PAGE
+    if (view === "download") {
+      return (
+        <Download_Page
+          onSelectRegion={handleSelectRegion}
+          onSwitchView={handleSwitchView}
+        />
+      );
+    }
+
     if (region === "landing") {
       return (
         <LandingPage

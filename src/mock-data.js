@@ -45,6 +45,12 @@ export const countyData = {
       waitingForAdoption: -10,
       reunificationRate: 10,
       familyPreservationCases: -5
+    },
+    history: {
+      kinship: [60, 55, 50, 40, 30],
+      adoption: [2, 2, 3, 4, 6],
+      biological: [30, 35, 32, 25, 20],
+      wraparound: [1, 2, 3, 3, 4]
     }
   },
   'nassau-ny': {
@@ -64,9 +70,23 @@ export const countyData = {
     familyPreservationCases: 156,
     reunificationRate: 72,
     churchesProvidingSupport: 89,
-    supportPercentage: 70
+    supportPercentage: 70,
+    trends: {
+      childrenInCare: -12,
+      licensedHomes: 8,
+      waitingForAdoption: -7,
+      reunificationRate: 4,
+      familyPreservationCases: -3
+    },
+    history: {
+      kinship: [200, 210, 205, 198, 189],
+      adoption: [30, 35, 38, 42, 45],
+      biological: [180, 175, 170, 165, 156],
+      wraparound: [70, 75, 80, 85, 89]
+    }
   }
 };
+
 
 export const organizations = [
   {
