@@ -3,7 +3,7 @@ import React from "react";
 const National_Metric_View = ({ state }) => {
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold">State Metric View</h1>
+      <h1 className="text-3xl font-bold">National Metric View</h1>
       <p className="mt-2 text-gray-600">
         Showing metrics for: <span className="font-semibold">{state || "Example State"}</span>
       </p>

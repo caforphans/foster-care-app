@@ -20,9 +20,14 @@ export default function Region_Menu({ onSelectRegion, onSwitchView }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleFinalSelect = (level, id) => {
-    onSelectRegion({ level, id });
-    onSwitchView("metric");
+  const handleFinalSelect = (level, id, name) => {
+    if (level === "national") {
+      onSelectRegion({ level, id, name: "United States" });
+      onSwitchView("national");
+    } else {
+      onSelectRegion({ level, id, name });
+      onSwitchView("metric");
+    }
     setMenuOpen(false);
     setOpenCountry(null);
     setOpenState(null);
@@ -38,11 +43,11 @@ export default function Region_Menu({ onSelectRegion, onSwitchView }) {
       </button>
 
       {menuOpen && (
-        <ul className="absolute mt-2 bg-white border rounded shadow-lg z-20 min-w-[220px]">
+        <ul className="absolute mt-2 bg-white border rounded-md shadow-lg z-20 min-w-[220px] text-left">
           {/* Country */}
           <li>
             <div
-              className="px-4 py-2 cursor-pointer hover:bg-blue-100 flex justify-between items-center"
+              className="px-4 py-2 cursor-pointer hover:bg-blue-100 flex justify-between items-center rounded"
               onClick={() =>
                 setOpenCountry(openCountry === "usa" ? null : "usa")
               }
@@ -58,20 +63,20 @@ export default function Region_Menu({ onSelectRegion, onSwitchView }) {
             </div>
 
             {openCountry === "usa" && (
-              <ul className="bg-white border-t border-gray-200">
+              <ul className="bg-white border-t border-gray-200 rounded-md ml-4">
                 {/* All States */}
                 <li
-                  className="px-6 py-2 cursor-pointer hover:bg-blue-100"
+                  className="px-4 py-2 cursor-pointer hover:bg-blue-100 rounded"
                   onClick={() => handleFinalSelect("national", "usa")}
                 >
                   All States
                 </li>
 
-                {/* Generate states dynamically */}
+                {/* States */}
                 {Object.entries(stateData).map(([stateId, state]) => (
                   <li key={stateId}>
                     <div
-                      className="px-6 py-2 cursor-pointer hover:bg-blue-100 flex justify-between items-center"
+                      className="px-4 py-2 cursor-pointer hover:bg-blue-100 flex justify-between items-center rounded"
                       onClick={() =>
                         setOpenState(openState === stateId ? null : stateId)
                       }
@@ -86,25 +91,25 @@ export default function Region_Menu({ onSelectRegion, onSwitchView }) {
                       </span>
                     </div>
 
-                    {/* County submenu */}
+                    {/* Counties */}
                     {openState === stateId && (
-                      <ul className="bg-white border-t border-gray-200">
+                      <ul className="bg-white border-t border-gray-200 rounded-md ml-8">
                         <li
-                          className="px-8 py-2 cursor-pointer hover:bg-blue-100"
-                          onClick={() => handleFinalSelect("state", stateId)}
+                          className="px-4 py-2 cursor-pointer hover:bg-blue-100 rounded"
+                          onClick={() =>
+                            handleFinalSelect("state", stateId, state.name)
+                          }
                         >
                           All Counties
                         </li>
                         {Object.entries(countyData)
-                          .filter(
-                            ([, county]) => county.state === state.name
-                          )
+                          .filter(([, county]) => county.state === state.name)
                           .map(([countyId, county]) => (
                             <li
                               key={countyId}
-                              className="px-8 py-2 cursor-pointer hover:bg-blue-100"
+                              className="px-4 py-2 cursor-pointer hover:bg-blue-100 rounded"
                               onClick={() =>
-                                handleFinalSelect("county", countyId)
+                                handleFinalSelect("county", countyId, county.name)
                               }
                             >
                               {county.name}
