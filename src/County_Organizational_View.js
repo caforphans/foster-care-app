@@ -1,7 +1,9 @@
 import React from "react";
+import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 // Assets
-import CountyMapPlaceholder from "./assets/CountyMapPlaceHolder.png";
 import MTELogo from "./assets/MTE_Logo.png";
 
 // Impact Area Icons
@@ -22,6 +24,7 @@ const orgData = [
     location: "Nassau County - 10100",
     phone: "516-456-7891",
     email: "info@nassaubridgeministry.org",
+    coords: [40.73061, -73.935242], // Example: somewhere in Nassau County
   },
   {
     name: "Hope Family Services",
@@ -33,6 +36,7 @@ const orgData = [
     location: "Nassau County - 10100",
     phone: "516-456-7891",
     email: "info@nassauhope.org",
+    coords: [40.732, -73.94],
   },
   {
     name: "Community Support Network",
@@ -44,14 +48,21 @@ const orgData = [
     location: "Nassau County - 10100",
     phone: "516-456-7891",
     email: "info@nassaucommunity.org",
+    coords: [40.728, -73.93],
   },
 ];
 
+// Small dot icon
+const dotIcon = new L.DivIcon({
+  className: "custom-dot",
+  html: '<div style="width:10px; height:10px; background:#1d4ed8; border-radius:50%;"></div>'
+});
+
 export default function County_Organizational_View({ countyName = "Nassau County, New York" }) {
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col">
+    <div className="min-h-screen  flex flex-col">
       {/* Header */}
-      <div className="bg-blue-100 border-b">
+      <div >
         <div className="max-w-7xl mx-auto px-4 py-6 text-center">
           <h1
             className="text-3xl sm:text-4xl text-gray-900"
@@ -130,13 +141,23 @@ export default function County_Organizational_View({ countyName = "Nassau County
 
         {/* Map + Organizations */}
         <div className="w-full lg:w-3/4 flex flex-col gap-6">
-          {/* Map Placeholder */}
+          {/* Interactive Map */}
           <div className="bg-white rounded-lg shadow-sm p-4">
-            <img
-              src={CountyMapPlaceholder}
-              alt="County Map Placeholder"
-              className="w-full rounded"
-            />
+            <MapContainer
+              center={[40.73, -73.935]} // Nassau County area
+              zoom={12}
+              style={{ height: "400px", width: "100%" }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {orgData.map((org) => (
+                <Marker key={org.name} position={org.coords} icon={dotIcon}>
+                  <Tooltip>{org.name}</Tooltip>
+                </Marker>
+              ))}
+            </MapContainer>
           </div>
 
           {/* Organization Cards */}

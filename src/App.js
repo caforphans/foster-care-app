@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import "leaflet/dist/leaflet.css";
 
 // Shared
 import TopNav from "./TopNav";

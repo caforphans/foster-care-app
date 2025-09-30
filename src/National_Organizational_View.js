@@ -18,9 +18,9 @@ const National_Organizational_View = ({
   onViewMetrics 
 }) => {
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col">
+    <div className="min-h-screen  flex flex-col">
       {/* Header */}
-      <div className="bg-blue-50 border-b">
+      <div className=" border-b">
         <div className="max-w-7xl mx-auto px-4 py-6 text-center relative">
           <h1
             className="text-3xl sm:text-4xl text-gray-900"

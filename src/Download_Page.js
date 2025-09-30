@@ -3,7 +3,7 @@ import TopNav from "./TopNav";
 
 export default function Download_Page({ onSelectRegion, onSwitchView }) {
   return (
-    <div className="min-h-screen bg-blue-100 flex flex-col">
+    <div className="min-h-screen  flex flex-col">
     
 
       {/* Page Content */}

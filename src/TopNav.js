@@ -16,7 +16,7 @@ export default function TopNav({ currentView, onSelectRegion, onSwitchView }) {
   ];
 
   return (
-    <div className="bg-blue-50 border-b shadow-sm py-3 px-4 flex justify-between items-center relative">
+    <div className="py-3 px-4 flex justify-between items-center relative">
       {/* Region Menu */}
       <Region_Menu onSelectRegion={onSelectRegion} onSwitchView={onSwitchView} />
 
