@@ -1,6 +1,6 @@
 /* Global background for entire app */
 body {
-  background-color: rgba(2, 173, 238, 0.15);
+  background-color:rgba(2, 173, 238, 0.15);
   margin: 0;
   min-height: 100vh;
 }
@@ -23,7 +23,7 @@ body {
 /* You probably don’t need App-header anymore if you’re using your own header,
    but I left it here in case other parts still rely on it. */
 .App-header {
-  background-color: transparent; /* removed dark background */
+  background-color:rgba(2, 173, 238, 0.15);
   min-height: 100vh;
   display: flex;
   flex-direction: column;

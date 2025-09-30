@@ -20,9 +20,9 @@ const County_Metric_View = ({ county, onExploreMap }) => {
   if (!data) return null;
 
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header>
+      <header className="relative">
         <div className="max-w-7xl mx-auto px-4 pt-8 pb-2 flex flex-col items-center">
           <h1 className="text-4xl md:text-5xl font-pacifico text-gray-900 text-center">
             {data.name}
@@ -40,8 +40,6 @@ const County_Metric_View = ({ county, onExploreMap }) => {
           <img src={AlabamaMap} alt="Alabama Map" className="w-20 h-auto mx-auto" />
           <div className="text-xs text-gray-600 mt-1">{data.countyOnly || data.name.split(",")[0]}</div>
         </div>
-
-
       </header>
 
       {/* Stat bar (extra space before it) */}

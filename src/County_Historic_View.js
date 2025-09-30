@@ -147,7 +147,7 @@ export default function County_Historic_View({ county }) {
       </div>
 
       {/* Footer */}
-      <div className="bg-blue-50 border-t py-4 text-right pr-6">
+      <div className="py-4 text-right pr-6">
         <img src={MTELogo} alt="More Than Enough" className="h-8 inline-block" />
       </div>
     </div>

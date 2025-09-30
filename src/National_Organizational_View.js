@@ -117,7 +117,7 @@ const National_Organizational_View = ({
         <div className="col-span-9">
           {/* Map + Legend */}
           <div className="bg-white rounded-lg shadow-sm p-4 mb-6 relative">
-            <div className="bg-blue-50 text-blue-700 p-2 rounded mb-4 text-sm space-y-2">
+            <div className="text-blue-700 p-2 rounded mb-4 text-sm space-y-2">
               <div className="flex items-center gap-2">
                 <img src={HandIcon} alt="Hover hand" className="w-5 h-5" />
                 <span>Hover over a state to display the data</span>
@@ -175,7 +175,7 @@ const National_Organizational_View = ({
       </div>
 
       {/* Footer */}
-      <div className="bg-blue-50 border-t py-4 text-right pr-6">
+      <div className="border-t py-4 text-right pr-6">
         <img src={MTELogo} alt="More Than Enough" className="h-8 inline-block" />
       </div>
     </div>

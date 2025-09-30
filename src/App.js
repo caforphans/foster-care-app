@@ -104,7 +104,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App min-h-screen">
       {region !== "landing" && (
         <TopNav
           currentRegion={region}
@@ -113,7 +113,9 @@ function App() {
           onSwitchView={handleSwitchView}
         />
       )}
-      {renderView()}
+      <div className="w-full">
+        {renderView()}
+      </div>
     </div>
   );
 }
