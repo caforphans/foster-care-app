@@ -14,7 +14,7 @@ export default function LandingPage({ onSelectRegion }) {
   };
 
   return (
-    <div className="relative min-h-screen bg-blue-50 flex flex-col items-center text-center px-4 overflow-hidden">
+    <div className="relative min-h-screen flex flex-col items-center text-center px-4 overflow-hidden">
       {/* Faint US map background */}
       <img
         src={USMap}

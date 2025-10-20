@@ -24,7 +24,7 @@ const County_Metric_View = ({ county, onExploreMap }) => {
       {/* Header */}
       <header className="relative">
         <div className="max-w-7xl mx-auto px-4 pt-8 pb-2 flex flex-col items-center">
-          <h1 className="text-4xl md:text-5xl font-pacifico text-gray-900 text-center">
+          <h1 className="text-4xl md:text-5xl text-gray-900 text-center font-nexa">
             {data.name}
           </h1>
           <p className="text-gray-600 text-center mt-2">

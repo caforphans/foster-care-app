@@ -24,7 +24,7 @@ const National_Organizational_View = ({
         <div className="max-w-7xl mx-auto px-4 py-6 text-center relative">
           <h1
             className="text-3xl sm:text-4xl text-gray-900"
-            style={{ fontFamily: "'Pacifico', cursive" }}
+            className="font-nexa"
           >
             United States of America
           </h1>

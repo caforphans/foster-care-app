@@ -9,8 +9,8 @@ export default function Download_Page({ onSelectRegion, onSwitchView }) {
       {/* Page Content */}
       <div className="flex-grow flex items-center justify-center">
         <h1 
-          className="text-4xl text-gray-900"
-          style={{ fontFamily: "'Pacifico', cursive" }}
+          className="text-4xl text-gray-900 font-nexa"
+         
         >
           Download Data Page
         </h1>

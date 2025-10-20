@@ -65,8 +65,8 @@ export default function County_Organizational_View({ countyName = "Nassau County
       <div >
         <div className="max-w-7xl mx-auto px-4 py-6 text-center">
           <h1
-            className="text-3xl sm:text-4xl text-gray-900"
-            style={{ fontFamily: "'Pacifico', cursive" }}
+            className="text-3xl sm:text-4xl text-gray-900 font-nexa"
+            
           >
             {countyName}
           </h1>

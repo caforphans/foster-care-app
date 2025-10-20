@@ -26,8 +26,8 @@ export default function County_Historic_View({ county }) {
       <div>
         <div className="max-w-7xl mx-auto px-4 py-6 text-center">
           <h1
-            className="text-3xl sm:text-4xl text-gray-900"
-            style={{ fontFamily: "'Pacifico', cursive" }}
+            className="text-3xl sm:text-4xl text-gray-900 font-nexa"
+            
           >
             {name}
           </h1>
@@ -115,10 +115,10 @@ export default function County_Historic_View({ county }) {
       </div>
 
       {/* Historical Change */}
-      <div className="bg-white max-w-5xl mx-auto rounded-lg shadow-sm p-6 mb-8 text-center">
+      <div className="bg-white max-w-5xl mx-auto rounded-lg shadow-sm p-6 mb-8 text-center ">
         <h3
-          className="text-xl font-semibold italic mb-4"
-          style={{ fontFamily: "'Pacifico', cursive" }}
+          className="text-xl font-semibold italic mb-4 font-nexa"
+        
         >
           Historical Change (2020 to 2024)
         </h3>
