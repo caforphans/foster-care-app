@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        nexa: ['"Nexa Rust Script"', "serif"],            // main script
+        nexa: ['"Nexa Rust Script"', "serif"],   // your existing custom font
+        lato: ['"Lato"', "sans-serif"],          // 👈 added Lato font
       },
     },
   },
