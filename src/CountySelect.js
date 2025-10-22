@@ -1,13 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef } from "react";
 
-/**
- * CountySelect
- * props:
- * - options: Array<{ id: string, label: string, data?: any }>
- * - placeholder?: string
- * - onChange?: (selectedOption) => void
- * - containerClassName?, controlClassName?, menuClassName?, optionClassName?, inputClassName?
- */
 export default function CountySelect({
   options = [],
   placeholder = "Select a county",
@@ -23,7 +15,6 @@ export default function CountySelect({
   const [selected, setSelected] = useState(null);
   const rootRef = useRef(null);
 
-  // close on click outside
   useEffect(() => {
     function onDocClick(e) {
       if (!rootRef.current) return;
@@ -47,7 +38,6 @@ export default function CountySelect({
 
   return (
     <div ref={rootRef} className={`relative w-full ${containerClassName}`}>
-      {/* trigger (translucent so it sits on the map) */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -80,9 +70,10 @@ export default function CountySelect({
             placeholder="Search county…"
             className={`mb-2 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#02ADEE] ${inputClassName}`}
           />
-          <ul role="listbox" className="max-h-64 overflow-auto rounded-lg">
+          {/* square list + square hover */}
+          <ul role="listbox" className="max-h-64 overflow-auto rounded-none">
             {filtered.length === 0 && (
-              <li className="px-3 py-2 text-sm text-slate-500">No matches</li>
+              <li className="px-3 py-2 text-left text-sm text-slate-500">No matches</li>
             )}
             {filtered.map((opt) => {
               const isSel = selected?.id === opt.id;
@@ -93,10 +84,10 @@ export default function CountySelect({
                   aria-selected={isSel}
                   onClick={() => handlePick(opt)}
                   className={[
-                    "cursor-pointer select-none rounded-md px-3 py-2 text-sm",
+                    "cursor-pointer select-none rounded-none px-3 py-2 text-left text-sm", // <- square
                     isSel
                       ? "bg-[#02ADEE] text-white"
-                      : "text-slate-800 hover:bg-[#1C6DD0] hover:text-white", // darker blue on hover
+                      : "text-slate-800 hover:bg-[#02ADEE] hover:text-white",
                     optionClassName,
                   ].join(" ")}
                 >

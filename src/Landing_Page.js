@@ -27,65 +27,68 @@ export default function LandingPage({ onSelectRegion, onExploreMap }) {
       className="relative min-h-screen overflow-hidden font-lato"
       style={{ backgroundColor: "rgba(2,173,238,0.16)" }}
     >
-      {/* MAP (slightly smaller + whiter) */}
+      {/* Lighter map with breathing room above */}
       <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-0 left-0 right-0 h-20" />
         <img
           src={USMap}
           alt="US map background"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
+          className="absolute left-1/2 top-[7.5rem] -translate-x-1/2 object-contain"
           style={{
-            width: "115%",          // slightly smaller visual footprint than full cover
-            height: "115%",
-            transform: "translate(-50%, -50%) scale(0.92)", // shrink a touch
-            opacity: 0.99,
-            filter: "grayscale(100%) brightness(1.45) contrast(0.85)",
+            width: "118%",
+            height: "118%",
+            filter: "grayscale(100%) brightness(1.8) contrast(0.8)",
           }}
         />
-        {/* white wash */}
-        <div className="absolute inset-0 bg-white/45" />
+        <div className="absolute inset-0 bg-white/50" />
       </div>
 
-      {/* CONTENT */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center px-4 pb-28 pt-8">
-        {/* Logo (slightly smaller) */}
-        <img src={MTELogo} alt="More Than Enough logo" className="h-14 w-auto object-contain" />
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center px-4 pb-28 pt-6">
+        {/* smaller logo */}
+        <img src={MTELogo} alt="More Than Enough logo" className="h-9 w-auto object-contain mt-1" />
 
-        {/* Heading (bolder) */}
-        <h1 className="mt-6 text-center text-[2.9rem] font-extrabold tracking-tight leading-tight text-gray-900">
-          Foster Care{" "}
-          <span className="text-[#02ADEE] no-underline">Where You Live</span>
+        {/* smaller title */}
+        <h1 className="mt-4 text-center text-[1.6rem] md:text-[1.9rem] font-extrabold leading-tight tracking-tight text-gray-900">
+          Foster Care <span className="text-[#02ADEE]">Where You Live</span>
         </h1>
 
-        {/* Subhead (bigger) */}
-        <p className="mt-3 text-center text-lg sm:text-xl text-gray-800">
+        <p className="mt-2 text-center text-lg text-gray-800">
           Explore the data and connect to local organizations
         </p>
 
-        {/* County prompt + select (no big white box) */}
-        <div className="mt-10 w-full max-w-2xl">
-          <div className="mb-3 flex items-center gap-3">
-            {/* single larger pin to the LEFT of the prompt */}
-            <img src={MapPin} alt="" className="h-7 w-7 opacity-90" aria-hidden />
-            <div className="text-[1.5rem] font-semibold text-gray-900">
-              What county do you live in?
-            </div>
-          </div>
+        {/* === ALIGNED BLOCK (icon column + content column) === */}
+        {/* County prompt + select */}
+<div className="mt-10 w-full max-w-2xl">
+  {/* ⬇️ add flex-col + items-start to align left */}
+  <div className="mb-3 flex flex-col items-start gap-2">
+    {/* map point (larger) */}
+    <div className="flex items-center gap-3">
+      <img src={MapPin} alt="" className="h-9 w-9 opacity-90" aria-hidden />
+      <div className="text-[1.5rem] font-semibold text-gray-900 text-left">
+        What county do you live in?
+      </div>
+    </div>
 
-          {/* label ABOVE and aligned with the select box */}
-          <div className="mb-1 text-xs text-gray-600 pl-0">County or county equivalent</div>
+    {/* label: bigger + aligned with the select's left edge */}
+    <div className="pl-[2.6rem] text-sm text-gray-600">
+      County or county equivalent
+    </div>
+  </div>
 
-          <CountySelect
-            options={countyOptions}
-            placeholder="Select a county"
-            onChange={handleCountyChange}
-            containerClassName="w-full"
-            controlClassName="w-full rounded-xl border border-black/10 bg-white/80 backdrop-blur px-4 py-3 shadow-sm focus-within:ring-2 focus-within:ring-[#02ADEE]"
-            menuClassName="rounded-xl border border-black/10 bg-white/95 shadow-lg overflow-hidden"
-            optionClassName="px-4 py-2 hover:bg-[#1C6DD0] hover:text-white"
-          />
-        </div>
+  <CountySelect
+    options={countyOptions}
+    placeholder="Select a county"
+    onChange={handleCountyChange}
+    containerClassName="w-full"
+    controlClassName="w-full rounded-xl border border-black/10 bg-white/80 backdrop-blur px-4 py-3 text-left shadow-sm focus-within:ring-2 focus-within:ring-[#02ADEE]"
+    menuClassName="rounded-xl border border-black/10 bg-white/95 shadow-lg overflow-hidden"
+    optionClassName="px-4 py-2 text-left hover:bg-[#02ADEE] hover:text-white"
+    inputClassName="text-left"
+  />
+</div>
+        {/* === /ALIGNED BLOCK === */}
 
-        {/* Floating CTA */}
+        {/* CTA */}
         <div className="pointer-events-none fixed inset-x-0 bottom-6 z-10 flex justify-center px-4">
           <div className="pointer-events-auto flex w-full max-w-2xl items-center justify-between gap-4 rounded-2xl bg-white/90 backdrop-blur p-4 shadow-lg ring-1 ring-black/5">
             <div className="flex items-center gap-3 text-gray-800">
@@ -107,11 +110,6 @@ export default function LandingPage({ onSelectRegion, onExploreMap }) {
           </div>
         </div>
       </div>
-
-      {/* small fallback if your CountySelect didn’t take the className props */}
-      <style>{`
-        .CountySelect .Select__option:hover { background:#1C6DD0; color:#fff; }
-      `}</style>
     </div>
   );
 }
