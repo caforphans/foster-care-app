@@ -5,23 +5,15 @@ import MapPin from "./assets/Map_Pin_icon.png";
 import CountySelect from "./CountySelect";
 import { countyData } from "./mock-data";
 
-// optional: state abbreviations
 const STATE_ABBR = { Alabama: "AL", "New York": "NY" };
 
 export default function LandingPage({ onSelectRegion, onExploreMap }) {
-  // Build options like "Nassau County, NY"
   const countyOptions = useMemo(() => {
     return Object.entries(countyData)
       .map(([id, c]) => {
         const abbr = STATE_ABBR[c.state] ?? c.state;
-        let label = c.name;
-        if (label.includes(",")) {
-          const [left] = label.split(",");
-          label = `${left.trim()}, ${abbr}`;
-        } else {
-          label = `${c.name}, ${abbr}`;
-        }
-        return { id, label, data: c };
+        const base = c.name.includes(",") ? c.name.split(",")[0].trim() : c.name;
+        return { id, label: `${base}, ${abbr}`, data: c };
       })
       .sort((a, b) => a.label.localeCompare(b.label));
   }, []);
@@ -33,67 +25,74 @@ export default function LandingPage({ onSelectRegion, onExploreMap }) {
   return (
     <div
       className="relative min-h-screen overflow-hidden font-lato"
-      style={{ backgroundColor: "rgba(2, 173, 238, 0.16)" }} // blue wash @ 16%
+      style={{ backgroundColor: "rgba(2,173,238,0.16)" }}
     >
-      {/* Visible, light US map */}
-      <img
-  src={USMap}
-  alt="US map background"
-  className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-  style={{
-    // stronger presence
-    opacity: 0.57,                               // try 0.48–0.56 if you want even more/less
-    filter: "grayscale(100%) brightness(1.05) contrast(1.25)"
-    // optional extra edge definition:
-    // filter: "grayscale(100%) brightness(1.02) contrast(1.35) drop-shadow(0 0 2px rgba(0,0,0,0.18))"
-  }}
-/>
+      {/* MAP (slightly smaller + whiter) */}
+      <div className="pointer-events-none absolute inset-0">
+        <img
+          src={USMap}
+          alt="US map background"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
+          style={{
+            width: "115%",          // slightly smaller visual footprint than full cover
+            height: "115%",
+            transform: "translate(-50%, -50%) scale(0.92)", // shrink a touch
+            opacity: 0.99,
+            filter: "grayscale(100%) brightness(1.45) contrast(0.85)",
+          }}
+        />
+        {/* white wash */}
+        <div className="absolute inset-0 bg-white/45" />
+      </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center px-4 pb-24 pt-10">
-        {/* Logo */}
-        <img src={MTELogo} alt="More Than Enough logo" className="h-16 w-auto object-contain" />
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center px-4 pb-28 pt-8">
+        {/* Logo (slightly smaller) */}
+        <img src={MTELogo} alt="More Than Enough logo" className="h-14 w-auto object-contain" />
 
-        {/* Heading */}
-        <h1 className="mt-6 text-center text-[2.75rem] font-semibold leading-tight text-gray-900">
+        {/* Heading (bolder) */}
+        <h1 className="mt-6 text-center text-[2.9rem] font-extrabold tracking-tight leading-tight text-gray-900">
           Foster Care{" "}
-          <span className="underline underline-offset-4" style={{ color: "#02ADEE" }}>
-            Where You Live
-          </span>
+          <span className="text-[#02ADEE] no-underline">Where You Live</span>
         </h1>
 
-        <p className="mt-3 text-center text-base text-gray-800 sm:text-lg">
+        {/* Subhead (bigger) */}
+        <p className="mt-3 text-center text-lg sm:text-xl text-gray-800">
           Explore the data and connect to local organizations
         </p>
 
-        {/* COUNTY SELECT CARD */}
-        <div className="mt-10 w-full max-w-2xl rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5">
+        {/* County prompt + select (no big white box) */}
+        <div className="mt-10 w-full max-w-2xl">
           <div className="mb-3 flex items-center gap-3">
-            <img src={MapPin} alt="Map pin icon" className="h-6 w-6" />
-            <div>
-              <div className="text-lg font-semibold text-gray-900">What county do you live in?</div>
-              <div className="text-xs text-gray-500">County or county equivalent</div>
+            {/* single larger pin to the LEFT of the prompt */}
+            <img src={MapPin} alt="" className="h-7 w-7 opacity-90" aria-hidden />
+            <div className="text-[1.5rem] font-semibold text-gray-900">
+              What county do you live in?
             </div>
           </div>
+
+          {/* label ABOVE and aligned with the select box */}
+          <div className="mb-1 text-xs text-gray-600 pl-0">County or county equivalent</div>
 
           <CountySelect
             options={countyOptions}
             placeholder="Select a county"
             onChange={handleCountyChange}
+            containerClassName="w-full"
+            controlClassName="w-full rounded-xl border border-black/10 bg-white/80 backdrop-blur px-4 py-3 shadow-sm focus-within:ring-2 focus-within:ring-[#02ADEE]"
+            menuClassName="rounded-xl border border-black/10 bg-white/95 shadow-lg overflow-hidden"
+            optionClassName="px-4 py-2 hover:bg-[#1C6DD0] hover:text-white"
           />
         </div>
 
-        {/* FLOATING CTA */}
+        {/* Floating CTA */}
         <div className="pointer-events-none fixed inset-x-0 bottom-6 z-10 flex justify-center px-4">
-          <div className="pointer-events-auto flex w-full max-w-2xl items-center justify-between gap-4 rounded-2xl bg-white p-4 shadow-lg ring-1 ring-black/5">
+          <div className="pointer-events-auto flex w-full max-w-2xl items-center justify-between gap-4 rounded-2xl bg-white/90 backdrop-blur p-4 shadow-lg ring-1 ring-black/5">
             <div className="flex items-center gap-3 text-gray-800">
               <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M9 3 4 5v16l5-2 6 2 5-2V3l-5 2-6-2ZM9 5l6 2v12l-6-2V5Z"
-                />
+                <path fill="currentColor" d="M9 3 4 5v16l5-2 6 2 5-2V3l-5 2-6-2ZM9 5l6 2v12l-6-2V5Z" />
               </svg>
-              <span className="text-sm sm:text-base font-normal">
+              <span className="text-sm sm:text-base">
                 Want to explore multiple counties or states?
               </span>
             </div>
@@ -108,6 +107,11 @@ export default function LandingPage({ onSelectRegion, onExploreMap }) {
           </div>
         </div>
       </div>
+
+      {/* small fallback if your CountySelect didn’t take the className props */}
+      <style>{`
+        .CountySelect .Select__option:hover { background:#1C6DD0; color:#fff; }
+      `}</style>
     </div>
   );
 }
